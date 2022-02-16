@@ -1,48 +1,44 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Navbar, Sidebar, Footer } from "./components";
-
 import {
   Home,
-  Products,
   SingleProduct,
-  About,
   Cart,
-  Error,
   Checkout,
+  Error,
+  About,
+  Products,
   PrivateRoute,
+  AuthWrapper,
 } from "./pages";
-
 function App() {
   return (
     <Router>
-      <Navbar></Navbar>
-      <Sidebar></Sidebar>
-
+      <Navbar />
+      <Sidebar />
       <Switch>
         <Route exact path="/">
           <Home />
         </Route>
-        <Route exact path="/about">
+        <Route path="/about">
           <About />
         </Route>
-        <Route exact path="/cart">
+        <Route path="/cart">
           <Cart />
         </Route>
         <Route exact path="/products">
           <Products />
         </Route>
-        <Route exact path="/products/:id" children={<SingleProduct />}>
-          <Home />
-        </Route>
-        <Route exact path="/checkout/:id">
+        <Route path="/products/:id" children={<SingleProduct />} />
+        <PrivateRoute path="/checkout">
           <Checkout />
-        </Route>
+        </PrivateRoute>
         <Route path="*">
           <Error />
         </Route>
       </Switch>
-      <Footer></Footer>
+      <Footer />
     </Router>
   );
 }
